@@ -206,23 +206,9 @@ var Module = typeof Module != "undefined" ? Module : {};
             },
             "proxyMobileData": function(data) {
                 var ptr = _malloc(data.length);
-                console.log(HEAPU8.set(data, ptr));
-                console.log("data: " + data);
-                console.log("Following function places: ");
-                console.log("Malloc function: ");
-                console.log(_malloc);
-                console.log("_free function: ");
-                console.log(_free);
-                console.log("_ac function: ");
-                console.log(_ac_proxy_mobile_data);
-                console.log("ptr: " + ptr);
-                console.log("HEAPU8: " + HEAPU8);
-                console.log("ac_proxy_mobile_data with data:" + _ac_proxy_mobile_data(ptr, data.length));
-                console.log("data length: " + data.length);
-                console.log("ac code: " + _ac_proxy_mobile_data);
-                console.log("malloc function" + _malloc);
-                console.log("_free ptr: " + _free(ptr));
-                console.log("_free function: " + _free);
+                HEAPU8.set(data, ptr);
+                _ac_proxy_mobile_data(ptr, data.length);
+                _free(ptr)
             },
             "showAnimations": function(v) {
                 _ac_show_animations(v)
@@ -1164,9 +1150,6 @@ var Module = typeof Module != "undefined" ? Module : {};
         34797: ($0,$1)=>{
             var buffer = HEAPU8.subarray($0, $0 + $1);
             buffer = raga.onPacket(buffer);
-            console.log("buffer: " + buffer);
-            console.log("$0: " + $0);
-            console.log("$1: " + $1);
             if (window["MC"] && window["MC"]["onMobileData"])
                 window["MC"]["onMobileData"](buffer)
         }
